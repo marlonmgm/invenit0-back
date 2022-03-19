@@ -1,0 +1,20 @@
+<h3>User alert</h3>
+<label id = 'testA'>test<label>
+<h3>Current users</h3>
+<label id = 'testB'>test<label>
+<script type="text/javascript" src="/dependencies/sails.io.js">
+  //autoConnect="false"
+  //environment="production"
+  //headers='{ "x-token": [{"key":"x-token","value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0Iiwic3ViIjoidXN1YXJpbyIsImp0aSI6IjBkYzZjZWU4LWM1NTItNDU3YS05ZWViLTgzYzdmZWMxM2U0OSIsImlhdCI6MTU0ODQ2NDI5MSwiZXhwIjoxNTQ4NDk2NjkxfQ.HqNqIoiqahO0spviIqO49ebEaCHLrKYKhkecA3IJdOs","description":"","type":"text","enabled":true}] "<%= typeof _csrf !== 'undefined' ? _csrf : '' %>" }'</script>
+<script type="text/javascript">    
+
+io.socket.on('user', function gotHelloMessage (data) {
+    console.log('User alert!', data);    
+    document.getElementById('testA').innerHTML = 'User alert!'+data;
+});
+
+io.socket.get('/user', function gotResponse(body, response) {
+  console.log('Current users: ', body);
+  document.getElementById('testB').innerHTML = JSON.stringify(response.body);
+});
+</script>
